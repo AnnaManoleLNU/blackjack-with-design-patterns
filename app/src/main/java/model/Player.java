@@ -30,7 +30,11 @@ public class Player {
    * @return the cards in the Player's hand
    */
   public Iterable<Card> getHand() {
-    return new LinkedList<Card>(hand);
+    List<Card> cards = new LinkedList<>();
+    for (Card.Mutable card : hand) {
+      cards.add(card);
+    }
+    return cards;
   }
 
   /**
