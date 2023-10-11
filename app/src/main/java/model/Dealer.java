@@ -91,7 +91,8 @@ public class Dealer extends Player {
   public boolean stand(Player player) {
     //TODO: implement me
     System.out.println("Dealer takes cards. Player stands."); // remove this
-    if (deck != null) {
+    // if player is not bust, dealer shows hand and takes cards until 17 or higher
+    if (deck != null && player.calcScore() <= maxScore && !isGameOver()) {
       showHand();
       while (hitRule.doHit(this)) {
         Card.Mutable c;
