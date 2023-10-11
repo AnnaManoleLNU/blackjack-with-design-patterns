@@ -2,6 +2,7 @@ package controller;
 
 import model.Game;
 import view.EnglishView;
+// import view.SwedishView;
 import view.View;
 
 /**

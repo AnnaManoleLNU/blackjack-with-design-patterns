@@ -1,6 +1,5 @@
 package model;
 
-import java.util.List;
 
 /**
  * Represents the entirety of the game. Acts as a Facade to the model.
@@ -60,18 +59,7 @@ public class Game {
    * @return True if the dealer has the initiaive.
    */
   public boolean stand() {
-    System.out.println("Dealer takes cards. Player stands."); // remove this
-    // TODO: implement me
-    
-    Iterable<Card> dealerHand = dealer.getHand();
-    // show the dealer's hand
-    for (Card c : dealerHand) {
-      if (c instanceof Card.Mutable) {
-        ((Card.Mutable) c).show(true);
-      }
-    }
-
-    return false;
+    return dealer.stand(player);
   }
 
   /**
