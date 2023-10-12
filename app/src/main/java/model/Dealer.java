@@ -27,7 +27,7 @@ public class Dealer extends Player {
   /**
    * Starts a new game if the game is not currently under way.
 
-   * @param player The player to play agains.
+   * @param player The player to play against.
    * @return True if the game could be started.
    */
   public boolean newGame(Player player) {
@@ -61,7 +61,7 @@ public class Dealer extends Player {
   /**
    * Checks if the dealer is the winner compared to a player.
 
-   * @param player The player to check agains.
+   * @param player The player to check against.
    * @return True if the dealer is the winner, false if the player is the winner.
    */
   public boolean isDealerWinner(Player player) {
@@ -89,10 +89,7 @@ public class Dealer extends Player {
    * The player has choosen to take no more cards, it is the dealers turn.
    */
   public boolean stand(Player player) {
-    //TODO: implement me
-    System.out.println("Dealer takes cards. Player stands."); // remove this
-    // if player is not bust, dealer shows hand and takes cards until 17 or higher
-    if (deck != null && player.calcScore() <= maxScore && !isGameOver()) {
+    if (deck != null) {
       showHand();
       while (hitRule.doHit(this)) {
         Card.Mutable c;
