@@ -23,16 +23,27 @@ public class SwedishView implements View {
 
    * @return the pressed character.
    */
-  public int getInput() {
+  public GameAction getInput() {
     try {
       int c = System.in.read();
       while (c == '\r' || c == '\n') {
         c = System.in.read();
       }
-      return c;
+      switch (c) {
+        case 'p':
+          return GameAction.Play;
+        case 'h':
+          return GameAction.Hit;
+        case 's':
+          return GameAction.Stand;
+        case 'q':
+          return GameAction.Quit;
+        default:
+          return getInput();
+      }
     } catch (java.io.IOException e) {
       System.out.println("" + e);
-      return 0;
+      return null;
     }
   }
 

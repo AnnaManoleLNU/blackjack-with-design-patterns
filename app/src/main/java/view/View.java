@@ -5,6 +5,13 @@ package view;
  */
 public interface View {
 
+  public enum GameAction {
+    Play,
+    Hit,
+    Stand,
+    Quit
+  }
+
   /**
    * Shows a welcome message.
    */
@@ -15,7 +22,8 @@ public interface View {
 
    * @return the pressed character.
    */
-  int getInput();
+  GameAction getInput();
+  
 
   /**
    * Displays a card.

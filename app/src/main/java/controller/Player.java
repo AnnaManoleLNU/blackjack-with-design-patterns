@@ -26,16 +26,24 @@ public class Player {
       view.displayGameOver(game.isDealerWinner());
     }
 
-    int input = view.getInput();
+    View.GameAction action = view.getInput();
 
-    if (input == 'p') {
-      game.newGame();
-    } else if (input == 'h') {
-      game.hit();
-    } else if (input == 's') {
-      game.stand();
+    switch (action) {
+      case Play:
+        game.newGame();
+        break;
+      case Hit:
+        game.hit();
+        break;
+      case Stand:
+        game.stand();
+        break;
+      case Quit:
+        return false;
+      default:
+        break;
     }
 
-    return input != 'q';
+    return action != View.GameAction.Quit;
   }
 }
