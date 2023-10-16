@@ -15,11 +15,15 @@ public class RulesFactory {
   }
 
   /**
-   * Crates the rule to use when starting a new game.
+   * Creates the rule to use when starting a new game.
 
    * @return The rule to use.
    */
   public NewGameStrategy getNewGameRule() {
     return new AmericanNewGameStrategy();
+  }
+
+  public WinCondition getWinCondition() {
+    return new EqualScoreDealerWins(); // new EqualScorePlayerWins();
   }
 }

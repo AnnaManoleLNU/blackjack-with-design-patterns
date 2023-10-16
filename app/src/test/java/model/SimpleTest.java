@@ -11,8 +11,6 @@ import model.rules.NewGameStrategy;
 import model.rules.RulesFactory;
 import model.rules.SoftSeventeenStrategy;
 
-// import static org.junit.jupiter.api.Assertions.assertFalse;
-// import static org.junit.jupiter.api.Assertions.assertTrue;
 
 public class SimpleTest {
 
