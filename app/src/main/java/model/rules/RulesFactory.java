@@ -24,6 +24,7 @@ public class RulesFactory {
   }
 
   public WinCondition getWinCondition() {
-    return new EqualScoreDealerWins(); // new EqualScorePlayerWins();
+    return new EqualScoreDealerWins(); 
+    // return new EqualScorePlayerWins();
   }
 }

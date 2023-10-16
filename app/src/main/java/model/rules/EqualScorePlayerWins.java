@@ -10,11 +10,18 @@ public class EqualScorePlayerWins implements WinCondition {
    * @param maxScore The maximum score.
    */
   public boolean isDealerWinner(int dealerScore, int playerScore, int maxScore) {
-    if (playerScore > maxScore) {
+    // Look if the dealer bust first. Player wins.
+    if (dealerScore > maxScore) {
+      return false; 
+    // Then look if the player bust. Dealer wins.
+    } else if (playerScore > maxScore) {
+      return true; 
+    // Then look if the scores are equal. Player wins.
+    } else if (dealerScore == playerScore) {
       return false;
-    } else if (dealerScore > maxScore) {
-      return true;
     }
-    return playerScore >= dealerScore;
+
+    // Check if the player has a score higher than the dealer.
+    return dealerScore > playerScore;
   }
 }
