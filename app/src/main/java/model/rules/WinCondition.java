@@ -2,6 +2,12 @@ package model.rules;
 
 public interface WinCondition {
   
-  // rule for who wins the game. Change who wins on an equal score. In one variant the dealer wins on equal score, in another the player wins on equal score.
+  /**
+   * Rule on who wins on equal score. Dealer or player.
+   *
+   * @param dealerScore The dealer's score.
+   * @param playerScore The player's score.
+   * @param maxScore The maximum score.
+   */
   boolean isDealerWinner(int dealerCore, int playerScore, int maxScore);
 }

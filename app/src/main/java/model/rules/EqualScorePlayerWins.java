@@ -2,7 +2,13 @@ package model.rules;
 
 public class EqualScorePlayerWins implements WinCondition {
   
-  // rule for who wins the game. Change who wins on an equal score. In one variant the dealer wins on equal score, in another the player wins on equal score.
+  /**
+   * Player wins on equal score.
+   *
+   * @param dealerScore The dealer's score.
+   * @param playerScore The player's score.
+   * @param maxScore The maximum score.
+   */
   public boolean isDealerWinner(int dealerScore, int playerScore, int maxScore) {
     if (playerScore > maxScore) {
       return false;
