@@ -1,4 +1,4 @@
-package model.rules;
+package model.rules.gamerules;
 
 import model.Dealer;
 import model.Deck;

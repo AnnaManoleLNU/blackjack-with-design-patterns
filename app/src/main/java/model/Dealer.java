@@ -1,9 +1,9 @@
 package model;
 
-import model.rules.HitStrategy;
-import model.rules.NewGameStrategy;
 import model.rules.RulesFactory;
-import model.rules.WinCondition;
+import model.rules.gamerules.NewGameStrategy;
+import model.rules.hitrules.HitStrategy;
+import model.rules.winrules.WinCondition;
 
 /**
  * Represents a dealer player that handles the deck of cards and runs the game using rules.

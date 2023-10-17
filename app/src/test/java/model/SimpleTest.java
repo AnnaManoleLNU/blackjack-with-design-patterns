@@ -6,10 +6,10 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
-import model.rules.HitStrategy;
-import model.rules.NewGameStrategy;
 import model.rules.RulesFactory;
-import model.rules.SoftSeventeenStrategy;
+import model.rules.gamerules.NewGameStrategy;
+import model.rules.hitrules.HitStrategy;
+import model.rules.hitrules.SoftSeventeenStrategy;
 
 
 public class SimpleTest {

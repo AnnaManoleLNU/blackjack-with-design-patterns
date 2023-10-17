@@ -1,6 +1,6 @@
-package model.rules;
+package model.rules.hitrules;
 
-  /**
+/**
    * Soft 17 rule. Dealer has to take another card if the score is 17 and contains an ace.
    *
    */

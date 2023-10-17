@@ -1,4 +1,4 @@
-package model.rules;
+package model.rules.winrules;
 
 public class EqualScoreDealerWins implements WinCondition {
   
