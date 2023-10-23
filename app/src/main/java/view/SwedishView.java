@@ -1,6 +1,5 @@
 package view;
 
-import model.Card;
 import model.Game;
 
 /**
@@ -97,7 +96,7 @@ public class SwedishView implements View {
     System.out.println("");
   }
 
-  public void redrawUi(Game game, Card lastPlayerCard, Card lastDealerCard) {
+  public void redrawUi(Game game) {
 
   }
 }

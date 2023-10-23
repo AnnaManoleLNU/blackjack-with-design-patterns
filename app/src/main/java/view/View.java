@@ -60,5 +60,5 @@ public interface View {
    */
   void displayGameOver(boolean dealerIsWinner);
 
-  void redrawUi(Game game, model.Card lastPlayerCard, model.Card lastDealerCard);
+  void redrawUi(Game game);
 }

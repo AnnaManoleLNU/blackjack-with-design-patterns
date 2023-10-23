@@ -1,6 +1,5 @@
 package controller;
 
-import model.Card;
 import model.Game;
 import view.View;
 
@@ -12,6 +11,12 @@ public class Player implements PlayerSubscriber {
   private Game game;
   private View view;
 
+  /**
+   * Creates a new instance of the Player class.
+   *
+   * @param game The game state.
+   * @param view The view to use.
+   */
   public Player(Game game, View view) {
     this.game = game;
     this.view = view;
@@ -61,28 +66,15 @@ public class Player implements PlayerSubscriber {
 
   @Override
   public void newCardDealt() {
-    Card lastPlayerCard = getLastCard(game.getPlayerHand());
-    Card lastDealerCard = getLastCard(game.getDealerHand());
-
-
-    redrawUi(lastPlayerCard, lastDealerCard);
+    redrawUi();
     try {
       Thread.sleep(3000);
     } catch (InterruptedException e) {
       e.printStackTrace();
-    }
-    
+    }   
   }
 
-  private Card getLastCard(Iterable<Card> hand) {
-    Card lastCard = null;
-    for (Card card : hand) {
-      lastCard = card;
-    }
-    return lastCard;
-  }
-
-  private void redrawUi(Card lastPlayerCard, Card lastDealerCard) {
-    view.redrawUi(game, lastPlayerCard, lastDealerCard);   
+  private void redrawUi() {
+    view.redrawUi(game);   
   }
 }
