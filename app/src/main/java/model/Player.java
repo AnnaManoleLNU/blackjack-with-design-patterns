@@ -1,5 +1,6 @@
 package model;
 
+import controller.PlayerSubscriber;
 import java.util.LinkedList;
 import java.util.List;
 
@@ -7,6 +8,8 @@ import java.util.List;
  * Represents a player in the Black Jack game. A Player has a hand of cards.
  */
 public class Player {
+  // In an observer pattern, the player is the publisher.
+  private List<PlayerSubscriber> subscribers = new LinkedList<PlayerSubscriber>();
 
   private List<Card.Mutable> hand;
   protected final int maxScore = 21;
@@ -22,6 +25,7 @@ public class Player {
    */
   public void dealCard(Card.Mutable addToHand) {
     hand.add(addToHand);
+    notifySubscribers();
   }
 
   /**
@@ -79,5 +83,22 @@ public class Player {
     }
 
     return score;
+  }
+
+  public void addSubscriber(PlayerSubscriber sub) {
+    subscribers.add(sub);
+  }
+
+  public void removeSubscriber(PlayerSubscriber sub) {
+    subscribers.remove(sub);
+  }
+
+  /**
+   * Notifies all subscribers that the player's hand has changed.
+   */
+  protected void notifySubscribers() {
+    for (PlayerSubscriber sub : subscribers) {
+      sub.newCardDealt();
+    }
   }
 }
