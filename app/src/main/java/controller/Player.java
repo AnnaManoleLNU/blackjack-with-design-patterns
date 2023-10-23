@@ -1,5 +1,6 @@
 package controller;
 
+import model.Card;
 import model.Game;
 import view.View;
 
@@ -60,16 +61,28 @@ public class Player implements PlayerSubscriber {
 
   @Override
   public void newCardDealt() {
-    redrawUi();
+    Card lastPlayerCard = getLastCard(game.getPlayerHand());
+    Card lastDealerCard = getLastCard(game.getDealerHand());
+
+
+    redrawUi(lastPlayerCard, lastDealerCard);
     try {
-      Thread.sleep(1000);
+      Thread.sleep(3000);
     } catch (InterruptedException e) {
       e.printStackTrace();
     }
     
   }
 
-  private void redrawUi() {
-    view.redrawUi(game);   
+  private Card getLastCard(Iterable<Card> hand) {
+    Card lastCard = null;
+    for (Card card : hand) {
+      lastCard = card;
+    }
+    return lastCard;
+  }
+
+  private void redrawUi(Card lastPlayerCard, Card lastDealerCard) {
+    view.redrawUi(game, lastPlayerCard, lastDealerCard);   
   }
 }

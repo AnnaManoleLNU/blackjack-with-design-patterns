@@ -1,5 +1,6 @@
 package view;
 
+import model.Card;
 import model.Game;
 
 /**
@@ -53,6 +54,10 @@ public class EnglishView implements View {
     System.out.println("" + card.getValue() + " of " + card.getColor());
   }
 
+  public void displayCardForRedraw(model.Card card) {
+    System.out.print("" + card.getValue() + " of " + card.getColor());
+  }
+
   public void displayPlayerHand(Iterable<model.Card> hand, int score) {
     displayHand("Player", hand, score);
   }
@@ -86,21 +91,29 @@ public class EnglishView implements View {
   }
 
   @Override
-  public void redrawUi(Game game) {
+  public void redrawUi(Game game, Card lastPlayerCard, Card lastDealerCard) {
+
+    System.out.println();
     // Print player and dealer alternating card
-    System.out.println("Dealer:");
-    for (model.Card c : game.getDealerHand()) {
-      displayCard(c);
+    System.out.print("Dealer: ");
+    for (Card card : game.getDealerHand()) {
+      if (card == lastDealerCard) {
+        displayCardForRedraw(card);
+        System.out.print(" dealer gets this card");
+      } else {
+        displayCardForRedraw(card);
+      }
     }
-    // System.out.println("Score: " + game.getDealerScore());
-    System.out.println("");
-    System.out.println("Player:");
-    for (model.Card c : game.getPlayerHand()) {
-      displayCard(c);
+    System.out.println();
+
+    System.out.print("Player: ");
+    for (Card card : game.getPlayerHand()) {
+      if (card == lastPlayerCard) {
+        displayCardForRedraw(card);
+        System.out.print(" player gets this card");
+      } else {
+        displayCardForRedraw(card);
+      }
     }
-    // System.out.println("Score: " + game.getPlayerScore());
-    System.out.println("");
-    
-    
   }
 }
