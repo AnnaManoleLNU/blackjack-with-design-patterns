@@ -5,7 +5,9 @@ import model.Dealer;
 import model.Deck;
 import model.Player;
 
-// Template method pattern. Subclasses implement the method from the interface - newGame(). 
+/**
+ * Template method pattern. Subclasses implement the method from the interface - newGame().
+ */
 public abstract class BaseNewGameStrategy implements NewGameStrategy {
 
   protected void dealCardToPlayer(Deck deck, Player player, boolean show) {

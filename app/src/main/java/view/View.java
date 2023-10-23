@@ -5,6 +5,9 @@ package view;
  */
 public interface View {
 
+  /**
+   * Represents the different actions that can be performed by the player.
+   */
   public enum GameAction {
     Play,
     Hit,

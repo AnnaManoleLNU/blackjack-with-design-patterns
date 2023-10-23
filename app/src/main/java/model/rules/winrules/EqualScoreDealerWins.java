@@ -1,5 +1,9 @@
 package model.rules.winrules;
 
+/**
+ * Class that implements the win condition where the dealer wins on equal score.
+ *
+ */
 public class EqualScoreDealerWins implements WinCondition {
   
   /**
