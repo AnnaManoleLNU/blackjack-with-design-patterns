@@ -18,7 +18,8 @@ public class App {
 
     Game g = new Game();
     View v = new EnglishView(); // new SwedishView();
-    Player ctrl = new Player();
+    Player ctrl = new Player(g, v);
+
 
     while (ctrl.play(g, v)) {
 

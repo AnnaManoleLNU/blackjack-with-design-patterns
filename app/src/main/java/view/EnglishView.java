@@ -1,5 +1,7 @@
 package view;
 
+import model.Game;
+
 /**
  * Implements an english console view.
  */
@@ -81,5 +83,24 @@ public class EnglishView implements View {
       System.out.println("You Won!");
     }
 
+  }
+
+  @Override
+  public void redrawUi(Game game) {
+    // Print player and dealer alternating card
+    System.out.println("Dealer:");
+    for (model.Card c : game.getDealerHand()) {
+      displayCard(c);
+    }
+    // System.out.println("Score: " + game.getDealerScore());
+    System.out.println("");
+    System.out.println("Player:");
+    for (model.Card c : game.getPlayerHand()) {
+      displayCard(c);
+    }
+    // System.out.println("Score: " + game.getPlayerScore());
+    System.out.println("");
+    
+    
   }
 }

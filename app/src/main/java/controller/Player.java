@@ -7,7 +7,18 @@ import view.View;
 /**
  * Scenario controller for playing the game.
  */
-public class Player {
+public class Player implements PlayerSubscriber {
+  private Game game;
+  private View view;
+
+  public Player(Game game, View view) {
+    this.game = game;
+    this.view = view;
+
+    // add the controller as a subscriber to the player and dealer
+    this.game.getPlayer().addSubscriber(this);
+    this.game.getDealer().addSubscriber(this);
+  }
 
   /**
    * Runs the play use case.
@@ -45,5 +56,20 @@ public class Player {
     }
 
     return action != View.GameAction.Quit;
+  }
+
+  @Override
+  public void newCardDealt() {
+    redrawUi();
+    try {
+      Thread.sleep(1000);
+    } catch (InterruptedException e) {
+      e.printStackTrace();
+    }
+    
+  }
+
+  private void redrawUi() {
+    view.redrawUi(game);   
   }
 }

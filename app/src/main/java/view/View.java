@@ -1,5 +1,7 @@
 package view;
 
+import model.Game;
+
 /**
  * Encapsulates the generic view functionality.
  */
@@ -57,4 +59,6 @@ public interface View {
    * @param dealerIsWinner True if the dealer is the winner.
    */
   void displayGameOver(boolean dealerIsWinner);
+
+  void redrawUi(Game game);
 }
