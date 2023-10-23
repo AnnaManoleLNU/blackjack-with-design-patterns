@@ -17,7 +17,8 @@ public class App {
   public static void main(String[] args) {
 
     Game g = new Game();
-    View v = new EnglishView(); // new SwedishView();
+    View v = new EnglishView();
+    // View v = new SwedishView();
     Player ctrl = new Player(g, v);
 
 

@@ -1,5 +1,6 @@
 package view;
 
+import model.Card;
 import model.Game;
 
 /**
@@ -96,7 +97,20 @@ public class SwedishView implements View {
     System.out.println("");
   }
 
+  @Override
   public void redrawUi(Game game) {
+    System.out.println();
 
+    System.out.print("Croupier: ");
+    for (Card card : game.getDealerHand()) {
+      displayCard(card);
+    }
+
+    System.out.println();
+
+    System.out.print("Spelare: ");
+    for (Card card : game.getPlayerHand()) {
+      displayCard(card);
+    }
   }
 }
