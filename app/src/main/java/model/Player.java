@@ -25,6 +25,7 @@ public class Player {
    */
   public void dealCard(Card.Mutable addToHand) {
     hand.add(addToHand);
+    // notify subscribers when a new card is dealt
     notifySubscribers();
   }
 
@@ -100,5 +101,9 @@ public class Player {
     for (PlayerSubscriber sub : subscribers) {
       sub.newCardDealt();
     }
+  }
+
+  public Card getLastCard() {
+    return hand.get(hand.size() - 1);
   }
 }

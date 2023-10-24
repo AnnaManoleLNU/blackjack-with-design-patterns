@@ -20,10 +20,8 @@ public class App {
     View v = new EnglishView();
     // View v = new SwedishView();
     Player ctrl = new Player(g, v);
-
-
     while (ctrl.play(g, v)) {
-
     }
   }
 }
+

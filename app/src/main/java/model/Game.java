@@ -106,4 +106,12 @@ public class Game {
     return dealer;
   }
 
+  public Card getLastPlayerCard() {
+    return player.getLastCard();
+  }
+
+  public Card getLastDealerCard() {
+    return dealer.getLastCard();
+  }
+
 }

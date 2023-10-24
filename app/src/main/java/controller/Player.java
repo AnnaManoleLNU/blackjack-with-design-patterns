@@ -66,15 +66,11 @@ public class Player implements PlayerSubscriber {
 
   @Override
   public void newCardDealt() {
-    redrawUi();
+    view.redrawUi(game);
     try {
       Thread.sleep(3000);
     } catch (InterruptedException e) {
       e.printStackTrace();
     }   
-  }
-
-  private void redrawUi() {
-    view.redrawUi(game);   
   }
 }
