@@ -101,7 +101,7 @@ public class EnglishView implements View {
         System.out.print(", ");
       } 
     }
-    
+
     System.out.println();
 
     System.out.print("Player: ");
