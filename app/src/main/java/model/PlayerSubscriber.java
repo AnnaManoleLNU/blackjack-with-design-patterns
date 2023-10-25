@@ -1,4 +1,4 @@
-package controller;
+package model;
 
 /**
  * Represents a subscriber to a Player. A PlayerSubscriber is notified when the Player's hand gets a new card.

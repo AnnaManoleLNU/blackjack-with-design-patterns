@@ -102,14 +102,14 @@ public class SwedishView implements View {
     System.out.println();
 
     System.out.print("Croupier: ");
-    for (Card card : game.getDealerHand()) {
+    for (Card card : game.getDealerHand().getCards()) {
       displayCard(card);
     }
 
     System.out.println();
 
     System.out.print("Spelare: ");
-    for (Card card : game.getPlayerHand()) {
+    for (Card card : game.getPlayerHand().getCards()) {
       displayCard(card);
     }
   }

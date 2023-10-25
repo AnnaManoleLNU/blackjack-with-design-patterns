@@ -16,7 +16,7 @@ public class SoftSeventeenStrategy implements HitStrategy {
    */
   public boolean doHit(model.Player dealer) {
     if (dealer.calcScore() == hitLimit) {
-      for (model.Card c : dealer.getHand()) {
+      for (model.Card c : dealer.getHand().getCards()) {
         if (c.getValue() == model.Card.Value.Ace) {
           return true;
         }

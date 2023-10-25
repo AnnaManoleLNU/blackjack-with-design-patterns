@@ -1,21 +1,17 @@
 package model;
 
-import controller.PlayerSubscriber;
-import java.util.LinkedList;
-import java.util.List;
+// import java.util.LinkedList;
+// import java.util.List;
 
 /**
  * Represents a player in the Black Jack game. A Player has a hand of cards.
  */
-public class Player implements ReadOnlyPlayer {
-  // In an observer pattern, the player is the publisher.
-  private List<PlayerSubscriber> subscribers = new LinkedList<PlayerSubscriber>();
-
-  private List<Card.Mutable> hand;
+public class Player  {
+  private Hand hand;
   protected final int maxScore = 21;
 
   public Player() {
-    hand = new LinkedList<Card.Mutable>();
+    hand = new Hand();
   }
 
   /**
@@ -24,9 +20,7 @@ public class Player implements ReadOnlyPlayer {
    * @param addToHand The card to add to the hand.
    */
   public void dealCard(Card.Mutable addToHand) {
-    hand.add(addToHand);
-    // notify subscribers when a new card is dealt
-    notifySubscribers();
+    hand.addCard(addToHand);
   }
 
   /**
@@ -34,8 +28,8 @@ public class Player implements ReadOnlyPlayer {
 
    * @return the cards in the Player's hand
    */
-  public Iterable<Card> getHand() {
-    return new LinkedList<Card>(hand);
+  public Hand getHand() {
+    return hand;
   }
 
   /**
@@ -49,8 +43,10 @@ public class Player implements ReadOnlyPlayer {
    * Shows all cards in the hand.
    */
   public void showHand() {
-    for (Card.Mutable c : hand) {
-      c.show(true);
+    for (Card c : hand.getCards()) {
+      if (c instanceof Card.Mutable) {
+        ((Card.Mutable) c).show(true);
+      }
     }
   }
 
@@ -69,14 +65,14 @@ public class Player implements ReadOnlyPlayer {
 
     int score = 0;
 
-    for (Card c : getHand()) {
+    for (Card c : hand.getCards()) {
       if (c.getValue() != Card.Value.Hidden) {
         score += cardScores[c.getValue().ordinal()];
       }
     }
 
     if (score > maxScore) {
-      for (Card c : getHand()) {
+      for (Card c : hand.getCards()) {
         if (c.getValue() == Card.Value.Ace && score > maxScore) {
           score -= 10;
         }
@@ -86,24 +82,22 @@ public class Player implements ReadOnlyPlayer {
     return score;
   }
 
-  public void addSubscriber(PlayerSubscriber sub) {
-    subscribers.add(sub);
+  public void addSubscriber(HandSubscriber sub) {
+    hand.addSubscriber(sub);
   }
 
-  public void removeSubscriber(PlayerSubscriber sub) {
-    subscribers.remove(sub);
+  public void removeSubscriber(HandSubscriber sub) {
+    hand.removeSubscriber(sub);
   }
 
-  /**
-   * Notifies all subscribers that the player's hand has changed.
-   */
-  protected void notifySubscribers() {
-    for (PlayerSubscriber sub : subscribers) {
-      sub.newCardDealt();
-    }
-  }
+  // /**
+  //  * Notifies all subscribers that the player's hand has changed.
+  //  */
+  // protected void notifySubscribers() {
+  //   hand.removeSubscriber(sub);
+  // }
 
   public Card getLastCard() {
-    return hand.get(hand.size() - 1);
+    return hand.getLastCard();
   }
 }
