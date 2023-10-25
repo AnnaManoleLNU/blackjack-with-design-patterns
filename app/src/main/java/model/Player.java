@@ -1,17 +1,20 @@
 package model;
 
-// import java.util.LinkedList;
-// import java.util.List;
+import java.util.LinkedList;
+import java.util.List;
 
 /**
  * Represents a player in the Black Jack game. A Player has a hand of cards.
  */
-public class Player  {
-  private Hand hand;
+public class Player {
+  // In an observer pattern, the player is the publisher.
+  private List<PlayerSubscriber> subscribers = new LinkedList<PlayerSubscriber>();
+
+  private List<Card.Mutable> hand;
   protected final int maxScore = 21;
 
   public Player() {
-    hand = new Hand();
+    hand = new LinkedList<Card.Mutable>();
   }
 
   /**
@@ -20,7 +23,9 @@ public class Player  {
    * @param addToHand The card to add to the hand.
    */
   public void dealCard(Card.Mutable addToHand) {
-    hand.addCard(addToHand);
+    hand.add(addToHand);
+    // notify subscribers when a new card is dealt
+    notifySubscribers();
   }
 
   /**
@@ -28,8 +33,8 @@ public class Player  {
 
    * @return the cards in the Player's hand
    */
-  public Hand getHand() {
-    return hand;
+  public Iterable<Card> getHand() {
+    return new LinkedList<Card>(hand);
   }
 
   /**
@@ -43,10 +48,8 @@ public class Player  {
    * Shows all cards in the hand.
    */
   public void showHand() {
-    for (Card c : hand.getCards()) {
-      if (c instanceof Card.Mutable) {
-        ((Card.Mutable) c).show(true);
-      }
+    for (Card.Mutable c : hand) {
+      c.show(true);
     }
   }
 
@@ -65,14 +68,14 @@ public class Player  {
 
     int score = 0;
 
-    for (Card c : hand.getCards()) {
+    for (Card c : getHand()) {
       if (c.getValue() != Card.Value.Hidden) {
         score += cardScores[c.getValue().ordinal()];
       }
     }
 
     if (score > maxScore) {
-      for (Card c : hand.getCards()) {
+      for (Card c : getHand()) {
         if (c.getValue() == Card.Value.Ace && score > maxScore) {
           score -= 10;
         }
@@ -82,22 +85,24 @@ public class Player  {
     return score;
   }
 
-  public void addSubscriber(HandSubscriber sub) {
-    hand.addSubscriber(sub);
+  public void addSubscriber(PlayerSubscriber sub) {
+    subscribers.add(sub);
   }
 
-  public void removeSubscriber(HandSubscriber sub) {
-    hand.removeSubscriber(sub);
+  public void removeSubscriber(PlayerSubscriber sub) {
+    subscribers.remove(sub);
   }
 
-  // /**
-  //  * Notifies all subscribers that the player's hand has changed.
-  //  */
-  // protected void notifySubscribers() {
-  //   hand.removeSubscriber(sub);
-  // }
+  /**
+   * Notifies all subscribers that the player's hand has changed.
+   */
+  protected void notifySubscribers() {
+    for (PlayerSubscriber sub : subscribers) {
+      sub.newCardDealt();
+    }
+  }
 
   public Card getLastCard() {
-    return hand.getLastCard();
+    return hand.get(hand.size() - 1);
   }
 }

@@ -93,7 +93,7 @@ public class EnglishView implements View {
     System.out.println();
 
     System.out.print("Dealer: ");
-    for (Card card : game.getDealerHand().getCards()) {
+    for (Card card : game.getDealerHand()) {
       if (game.getLastDealerCard() == card) {
         displayCardForRedraw(card);
       } else {
@@ -105,7 +105,7 @@ public class EnglishView implements View {
     System.out.println();
 
     System.out.print("Player: ");
-    for (Card card : game.getPlayerHand().getCards()) {
+    for (Card card : game.getPlayerHand()) {
       if (game.getLastPlayerCard() == card) {
         displayCardForRedraw(card);
       } else {

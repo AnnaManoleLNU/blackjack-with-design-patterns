@@ -1,16 +1,14 @@
 package controller;
 
 import model.Game;
-import model.HandSubscriber;
-// import model.PlayerSubscriber;
+import model.PlayerSubscriber;
 import view.View;
-
 
 
 /**
  * Scenario controller for playing the game.
  */
-public class Player implements HandSubscriber {
+public class Player implements PlayerSubscriber {
   private Game game;
   private View view;
 
@@ -25,8 +23,8 @@ public class Player implements HandSubscriber {
     this.view = view;
 
     // add the controller as a subscriber to the player and dealer
-    this.game.getPlayerHand().addSubscriber(this);
-    this.game.getDealerHand().addSubscriber(this);
+    this.game.getPlayer().addSubscriber(this);
+    this.game.getDealer().addSubscriber(this);
   }
 
   /**
@@ -39,8 +37,8 @@ public class Player implements HandSubscriber {
   public boolean play(Game game, View view) {
     view.displayWelcomeMessage();
 
-    view.displayDealerHand(game.getDealerHand().getCardsImmutable(), game.getDealerScore());
-    view.displayPlayerHand(game.getPlayerHand().getCardsImmutable(), game.getPlayerScore());
+    view.displayDealerHand(game.getDealerHand(), game.getDealerScore());
+    view.displayPlayerHand(game.getPlayerHand(), game.getPlayerScore());
 
     if (game.isGameOver()) {
       view.displayGameOver(game.isDealerWinner());
@@ -68,7 +66,7 @@ public class Player implements HandSubscriber {
   }
 
   @Override
-  public void onHandChanged(model.Hand hand) {
+  public void newCardDealt() {
     view.redrawUi(game);
     try {
       Thread.sleep(3000);

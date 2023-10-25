@@ -65,18 +65,18 @@ public class Game {
   /**
    * Gets the cards currently in the dealer's hand.
 
-   * @return The dealer's hand.
+   * @return The dealer's cards.
    */
-  public Hand getDealerHand() {
+  public Iterable<Card> getDealerHand() {
     return dealer.getHand();
   }
 
   /**
    * Gets the cards currently in the player's hand.
 
-   * @return The player's hand.
+   * @return The palyer's cards.
    */
-  public Hand getPlayerHand() {
+  public Iterable<Card> getPlayerHand() {
     return player.getHand();
   }
 
@@ -98,13 +98,13 @@ public class Game {
     return player.calcScore();
   }
 
-  // public Player getPlayer() {
-  //   return player;
-  // }
+  public Player getPlayer() {
+    return player;
+  }
 
-  // public Dealer getDealer() {
-  //   return dealer;
-  // }
+  public Dealer getDealer() {
+    return dealer;
+  }
 
   public Card getLastPlayerCard() {
     return player.getLastCard();
