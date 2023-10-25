@@ -98,11 +98,11 @@ public class Game {
     return player.calcScore();
   }
 
-  public Player getPlayer() {
+  public ReadOnlyPlayer getPlayer() {
     return player;
   }
 
-  public Dealer getDealer() {
+  public ReadOnlyPlayer getDealer() {
     return dealer;
   }
 

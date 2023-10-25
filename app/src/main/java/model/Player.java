@@ -7,7 +7,7 @@ import java.util.List;
 /**
  * Represents a player in the Black Jack game. A Player has a hand of cards.
  */
-public class Player {
+public class Player implements ReadOnlyPlayer {
   // In an observer pattern, the player is the publisher.
   private List<PlayerSubscriber> subscribers = new LinkedList<PlayerSubscriber>();
 
