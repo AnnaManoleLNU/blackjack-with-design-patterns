@@ -114,4 +114,9 @@ public class EnglishView implements View {
       } 
     }
   }
+
+  public void accept(ViewVisitor visitor) {
+    visitor.visit(this);
+  }
+
 }

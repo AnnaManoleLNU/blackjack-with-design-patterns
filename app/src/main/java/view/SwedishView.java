@@ -113,4 +113,9 @@ public class SwedishView implements View {
       displayCard(card);
     }
   }
+
+  public void accept(ViewVisitor visitor) {
+    visitor.visit(this);
+  }
+
 }

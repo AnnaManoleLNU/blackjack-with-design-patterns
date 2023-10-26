@@ -61,4 +61,7 @@ public interface View {
   void displayGameOver(boolean dealerIsWinner);
 
   void redrawUi(Game game);
+
+  abstract void accept(ViewVisitor visitor);
+
 }
