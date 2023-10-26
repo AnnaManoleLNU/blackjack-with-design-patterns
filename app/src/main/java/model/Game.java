@@ -1,6 +1,5 @@
 package model;
 
-
 /**
  * Represents the entirety of the game. Acts as a Facade to the model.
  */

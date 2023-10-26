@@ -1,6 +1,6 @@
 # A3
 
-Assignment 3 - grade 2
+## Assignment 3 - grade 2
 
 Group members:
 - Anna Manole
@@ -18,3 +18,10 @@ A view interface is implemented by the two types of views that are available: on
 The observer pattern was used to notify the Player controller when a player (dealer or human player) draws a new card. Here we have a pause after each draw. The view redraws the UI when this happens and prints out the new state of the game, with the new card.
 
 After all the cards have finished being drawn, the whole game state is printed out, including the scores of the players and in the case of the game being over, the winner is printed out.
+
+## Assignment 3 - grade 3
+
+Group members:
+- Anna Manole
+
+I implemented an AbstractRuleFactory to create different combinations of rules for the game. Total of 8 different combinations are possible (3 rule types with 2 possible choices each - 2 x 2 x 2). 
