@@ -1,9 +1,9 @@
 package model;
 
-import model.rules.RulesFactory;
-import model.rules.gamerules.NewGameStrategy;
-import model.rules.hitrules.HitStrategy;
-import model.rules.winrules.WinCondition;
+import model.rules.RulesAbstractFactory;
+// import model.rules.gamerules.NewGameStrategy;
+// import model.rules.hitrules.HitStrategy;
+// import model.rules.winrules.WinCondition;
 
 /**
  * Represents a dealer player that handles the deck of cards and runs the game using rules.
@@ -11,19 +11,21 @@ import model.rules.winrules.WinCondition;
 public class Dealer extends Player {
 
   private Deck deck;
-  private NewGameStrategy newGameRule;
-  private HitStrategy hitRule;
-  private WinCondition winCondition;
+  private RulesAbstractFactory rulesFactory;
+  // private NewGameStrategy newGameRule;
+  // private HitStrategy hitRule;
+  // private WinCondition winCondition;
 
   /**
    * Initializing constructor.
 
    * @param rulesFactory A factory that creates the rules to use.
    */
-  public Dealer(RulesFactory rulesFactory) {
-    newGameRule = rulesFactory.getNewGameRule();
-    hitRule = rulesFactory.getHitRule();
-    winCondition = rulesFactory.getWinCondition();
+  public Dealer(RulesAbstractFactory rulesFactory) {
+    // newGameRule = rulesFactory.getNewGameRule();
+    // hitRule = rulesFactory.getHitRule();
+    // winCondition = rulesFactory.getWinCondition();
+    this.rulesFactory = rulesFactory;
   }
 
   /**
@@ -37,7 +39,8 @@ public class Dealer extends Player {
       deck = new Deck();
       clearHand();
       player.clearHand();
-      return newGameRule.newGame(deck, this, player);
+      // return newGameRule.newGame(deck, this, player);
+      return rulesFactory.createNewGameStrategy().newGame(deck, this, player);
     }
     return false;
   }
@@ -67,7 +70,8 @@ public class Dealer extends Player {
    * @return True if the dealer is the winner, false if the player is the winner.
    */
   public boolean isDealerWinner(Player player) {
-    return winCondition.isDealerWinner(calcScore(), player.calcScore(), maxScore);
+    // return winCondition.isDealerWinner(calcScore(), player.calcScore(), maxScore);
+    return rulesFactory.createWinCondition().isDealerWinner(calcScore(), player.calcScore(), maxScore);
   }
 
   /**
@@ -76,7 +80,11 @@ public class Dealer extends Player {
    * @return True if the game is over.
    */
   public boolean isGameOver() {
-    if (deck != null && hitRule.doHit(this) != true) {
+    // if (deck != null && hitRule.doHit(this) != true) {
+    //   return true;
+    // }
+    // return false;
+    if (deck != null && rulesFactory.createHitStrategy().doHit(this) != true) {
       return true;
     }
     return false;
@@ -88,7 +96,7 @@ public class Dealer extends Player {
   public boolean stand(Player player) {
     if (deck != null) {
       showHand();
-      while (hitRule.doHit(this)) {
+      while (rulesFactory.createHitStrategy().doHit(this)) {
         Card.Mutable c;
         c = deck.getCard();
         c.show(true);

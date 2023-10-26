@@ -1,6 +1,8 @@
 package controller;
 
 import model.Game;
+import model.rules.AmericanSoftSeventeenDealerWinFactory;
+import model.rules.RulesAbstractFactory;
 import view.EnglishView;
 // import view.SwedishView;
 import view.View;
@@ -16,7 +18,8 @@ public class App {
   */
   public static void main(String[] args) {
 
-    Game g = new Game();
+    RulesAbstractFactory rulesFactory = new AmericanSoftSeventeenDealerWinFactory();
+    Game g = new Game(rulesFactory);
     View v = new EnglishView();
     // View v = new SwedishView();
     Player ctrl = new Player(g, v);
