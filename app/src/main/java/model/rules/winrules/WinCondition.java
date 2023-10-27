@@ -1,5 +1,7 @@
 package model.rules.winrules;
 
+import model.rules.RuleVisitor;
+
 /**
  * Interface for the win condition.
  *
@@ -14,4 +16,6 @@ public interface WinCondition {
    * @param maxScore The maximum score.
    */
   boolean isDealerWinner(int dealerScore, int playerScore, int maxScore);
+
+  void accept(RuleVisitor visitor);
 }

@@ -2,9 +2,10 @@ package controller;
 
 import model.Game;
 import model.rules.AmericanSoftSeventeenDealerWinFactory;
+import model.rules.InternationalBasicPlayerWinFactory;
 import model.rules.RulesAbstractFactory;
-import view.EnglishView;
-// import view.SwedishView;
+// import view.EnglishView;
+import view.SwedishView;
 import view.View;
 
 /**
@@ -17,11 +18,11 @@ public class App {
   * @param args Not used.
   */
   public static void main(String[] args) {
-
-    RulesAbstractFactory rulesFactory = new AmericanSoftSeventeenDealerWinFactory();
+    // RulesAbstractFactory rulesFactory = new AmericanSoftSeventeenDealerWinFactory();
+    RulesAbstractFactory rulesFactory = new InternationalBasicPlayerWinFactory();
     Game g = new Game(rulesFactory);
-    View v = new EnglishView();
-    // View v = new SwedishView();
+    // View v = new EnglishView();
+    View v = new SwedishView();
     Player ctrl = new Player(g, v);
     while (ctrl.play(g, v)) {
     }

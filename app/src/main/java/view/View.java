@@ -5,7 +5,7 @@ import model.Game;
 /**
  * Encapsulates the generic view functionality.
  */
-public interface View {
+public interface View extends model.rules.RuleVisitor {
 
   /**
    * Represents the different actions that can be performed by the player.
@@ -61,7 +61,5 @@ public interface View {
   void displayGameOver(boolean dealerIsWinner);
 
   void redrawUi(Game game);
-
-  abstract void accept(ViewVisitor visitor);
 
 }

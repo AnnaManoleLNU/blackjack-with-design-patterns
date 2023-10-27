@@ -1,6 +1,7 @@
 package model.rules.hitrules;
 
 import model.Player;
+import model.rules.RuleVisitor;
 
 /**
  * Rule interface that encapsulates when a player (the dealer) should take more cards.
@@ -13,4 +14,6 @@ public interface HitStrategy {
    * @return True if the rule decided the player should take another card.
    */
   boolean doHit(Player dealer);
+
+  void accept(RuleVisitor visitor);
 }

@@ -89,6 +89,7 @@ public class SwedishView implements View {
   }
 
   private void displayHand(String name, Iterable<model.Card> hand, int score) {
+    System.out.println();
     System.out.println(name + " Har: " + score);
     for (model.Card c : hand) {
       displayCard(c);
@@ -114,8 +115,36 @@ public class SwedishView implements View {
     }
   }
 
-  public void accept(ViewVisitor visitor) {
-    visitor.visit(this);
+  @Override
+  public void visit(model.rules.gamerules.AmericanNewGameStrategy americanNewGameStrategy) {
+    System.out.println("Använder American New Game Strategy. ");
   }
+
+  @Override
+  public void visit(model.rules.gamerules.InternationalNewGameStrategy internationalNewGameStrategy) {
+    System.out.println("Använder International New Game Strategy. ");
+  }
+
+  @Override
+  public void visit(model.rules.hitrules.BasicHitStrategy basicHitStrategy) {
+    System.out.println("Använder Basic Hit Strategy. ");
+  }
+
+  @Override
+  public void visit(model.rules.hitrules.SoftSeventeenStrategy softSeventeenHitStrategy) {
+    System.out.println("Använder Soft Seventeen Hit Strategy. ");
+  }
+
+  @Override
+  public void visit(model.rules.winrules.EqualScoreDealerWins equalScoreDealerWins) {
+    System.out.println("Använder Equal Score Dealer Wins Rule. ");
+  }
+
+  @Override
+  public void visit(model.rules.winrules.EqualScorePlayerWins equalScorePlayerWins) {
+    System.out.println("Använder Equal Score Player Wins Rule. ");
+  }
+
+  
 
 }

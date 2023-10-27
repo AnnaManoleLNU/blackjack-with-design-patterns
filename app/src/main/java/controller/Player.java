@@ -37,6 +37,9 @@ public class Player implements PlayerSubscriber {
   public boolean play(Game game, View view) {
     view.displayWelcomeMessage();
 
+    // Display the rules.
+    game.getDealer().accept(view);
+
     view.displayDealerHand(game.getDealerHand(), game.getDealerScore());
     view.displayPlayerHand(game.getPlayerHand(), game.getPlayerScore());
 

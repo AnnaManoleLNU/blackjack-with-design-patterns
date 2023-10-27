@@ -1,5 +1,7 @@
 package model.rules.hitrules;
 
+import model.rules.RuleVisitor;
+
 /**
  * Soft 17 rule. Dealer has to take another card if the score is 17 and contains
  * an ace.
@@ -23,5 +25,10 @@ public class SoftSeventeenStrategy implements HitStrategy {
       }
     }
     return dealer.calcScore() <= hitLimit;
+  }
+
+  @Override
+  public void accept(RuleVisitor visitor) {
+    visitor.visit(this);
   }
 }

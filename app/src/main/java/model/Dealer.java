@@ -1,5 +1,6 @@
 package model;
 
+import model.rules.RuleVisitor;
 import model.rules.RulesAbstractFactory;
 import model.rules.gamerules.NewGameStrategy;
 import model.rules.hitrules.HitStrategy;
@@ -99,6 +100,17 @@ public class Dealer extends Player {
     }
     
     return false;
+  }
+
+  /**
+   * Accepts a visitor to visit the rules.
+   *
+   * @param visitor - The visitor to accept.
+   */
+  public void accept(RuleVisitor visitor) {
+    newGameStrategy.accept(visitor);
+    hitStrategy.accept(visitor);
+    winCondition.accept(visitor);
   }
 
 }

@@ -1,5 +1,7 @@
 package model.rules.winrules;
 
+import model.rules.RuleVisitor;
+
 /**
  * Class that implements the win condition where the dealer wins on equal score.
  *
@@ -27,5 +29,10 @@ public class EqualScoreDealerWins implements WinCondition {
 
     // Check if the dealer has a score higher than the player.
     return dealerScore > playerScore;
+  }
+
+  @Override
+  public void accept(RuleVisitor visitor) {
+    visitor.visit(this);
   }
 }

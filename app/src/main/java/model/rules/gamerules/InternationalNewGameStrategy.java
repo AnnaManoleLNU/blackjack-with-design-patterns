@@ -3,6 +3,7 @@ package model.rules.gamerules;
 import model.Dealer;
 import model.Deck;
 import model.Player;
+import model.rules.RuleVisitor;
 
 /**
  * The International version of the game has the dealer deal themselves only one card face up.
@@ -22,5 +23,10 @@ public class InternationalNewGameStrategy extends BaseNewGameStrategy {
     dealCardToDealer(deck, dealer, true);
     dealCardToPlayer(deck, player, true);
     return true;
+  }
+
+  @Override
+  public void accept(RuleVisitor visitor) {
+    visitor.visit(this);
   }
 }

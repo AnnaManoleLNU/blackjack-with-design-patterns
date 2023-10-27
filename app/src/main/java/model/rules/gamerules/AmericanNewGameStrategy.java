@@ -3,6 +3,7 @@ package model.rules.gamerules;
 import model.Dealer;
 import model.Deck;
 import model.Player;
+import model.rules.RuleVisitor;
 
 /**
  * The American version of the game has the dealer deal themselves a second card face down.
@@ -24,5 +25,10 @@ public class AmericanNewGameStrategy extends BaseNewGameStrategy {
     dealCardToDealer(deck, dealer, false);
 
     return true;
+  }
+
+  @Override
+  public void accept(RuleVisitor visitor) {
+    visitor.visit(this);
   }
 }

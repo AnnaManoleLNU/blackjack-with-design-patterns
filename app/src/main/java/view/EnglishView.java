@@ -65,6 +65,7 @@ public class EnglishView implements View {
   }
 
   private void displayHand(String name, Iterable<model.Card> hand, int score) {
+    System.out.println();
     System.out.println(name + " Has: ");
     for (model.Card c : hand) {
       displayCard(c);
@@ -115,8 +116,35 @@ public class EnglishView implements View {
     }
   }
 
-  public void accept(ViewVisitor visitor) {
-    visitor.visit(this);
+  @Override
+  public void visit(model.rules.gamerules.AmericanNewGameStrategy americanNewGameStrategy) {
+    System.out.println("Using American New Game Strategy. ");
+    
+  }
+
+  @Override
+  public void visit(model.rules.gamerules.InternationalNewGameStrategy internationalNewGameStrategy) {
+    System.out.println("Using International New Game Strategy. ");
+  }
+
+  @Override
+  public void visit(model.rules.hitrules.BasicHitStrategy basicHitStrategy) {
+    System.out.println("Using Basic Hit Strategy. ");
+  }
+
+  @Override
+  public void visit(model.rules.hitrules.SoftSeventeenStrategy softSeventeenHitStrategy) {
+    System.out.println("Using Soft Seventeen Hit Strategy. ");
+  }
+
+  @Override
+  public void visit(model.rules.winrules.EqualScoreDealerWins equalScoreDealerWins) {
+    System.out.println("Using Equal Score Dealer Wins Rule. ");
+  }
+
+  @Override
+  public void visit(model.rules.winrules.EqualScorePlayerWins equalScorePlayerWins) {
+    System.out.println("Using Equal Score Player Wins Rule. ");
   }
 
 }
