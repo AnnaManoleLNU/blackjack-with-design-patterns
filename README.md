@@ -24,4 +24,10 @@ After all the cards have finished being drawn, the whole game state is printed o
 Group members:
 - Anna Manole
 
-I implemented an AbstractRuleFactory to create different combinations of rules for the game. Total of 8 different combinations are possible (3 rule types with 2 possible choices each - 2 x 2 x 2). 
+I implemented a RuleAbstractFactory class to create different combinations of rules for the game. Total of 8 different combinations are possible (3 rule types with 2 possible choices each - 2 x 2 x 2). Only 2 of these combinations are implemented in the game, but the rest can also be creating by combining the different rules. The Game class is parameterized with the RuleAbstractFactory class, so that the rules can be changed at runtime.
+
+The design pattern visitor was used in order to print what rules are used at the start of the game. The interface RuleVisitor visits all the different types of rules. They accept the visitor, as well as the Dealer class, that creates the rules still.
+
+The View interface extents the RuleVisitor interface, so that the view can also print out the rules that are used in the game, by defining abstract methods in the BaseView superclass. The SwedishView and EnglishView classes implement these methods, as well as other abstract methods to suit the language needs.
+
+Some of the arrows in the UML diagram that go from Dealer have been ommitted (associations with the different interfaces for rules).
