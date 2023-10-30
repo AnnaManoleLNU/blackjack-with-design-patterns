@@ -6,48 +6,15 @@ import model.Game;
 /**
  * Implements a Swedish console view.
  */
-public class SwedishView implements View {
+public class SwedishView extends BaseView {
 
   /**
-   * Shows a welcome message.
+   * Displays welcome message according to the language.
    */
-  public void displayWelcomeMessage() {
-    for (int i = 0; i < 50; i++) {
-      System.out.print("\n");
-    }
-
+  public void displayLanguageBasedMessage() {
     System.out.println("Hej Black Jack Världen");
     System.out.println("----------------------");
     System.out.println("Skriv 'p' för att Spela, 'h' för nytt kort, 's' för att stanna 'q' för att avsluta\n");
-  }
-
-  /**
-   * Returns pressed characters from the keyboard.
-
-   * @return the pressed character.
-   */
-  public GameAction getInput() {
-    try {
-      int c = System.in.read();
-      while (c == '\r' || c == '\n') {
-        c = System.in.read();
-      }
-      switch (c) {
-        case 'p':
-          return GameAction.Play;
-        case 'h':
-          return GameAction.Hit;
-        case 's':
-          return GameAction.Stand;
-        case 'q':
-          return GameAction.Quit;
-        default:
-          return getInput();
-      }
-    } catch (java.io.IOException e) {
-      System.out.println("" + e);
-      return null;
-    }
   }
 
   /**
@@ -115,36 +82,28 @@ public class SwedishView implements View {
     }
   }
 
-  @Override
-  public void visit(model.rules.gamerules.AmericanNewGameStrategy americanNewGameStrategy) {
-    System.out.println("Använder American New Game Strategy. ");
+  public void displayAmericanNewGameStrategy() {
+    System.out.print("Använder Amerikansk Spelstrategi. ");
   }
 
-  @Override
-  public void visit(model.rules.gamerules.InternationalNewGameStrategy internationalNewGameStrategy) {
-    System.out.println("Använder International New Game Strategy. ");
+  public void displayInternationalNewGameStrategy() {
+    System.out.println("Använder Internationell Spelstrategi. ");
   }
 
-  @Override
-  public void visit(model.rules.hitrules.BasicHitStrategy basicHitStrategy) {
-    System.out.println("Använder Basic Hit Strategy. ");
+  public void displayBasicHitStrategy() {
+    System.out.println("Använder Grundläggande Träffstrategi. ");
   }
 
-  @Override
-  public void visit(model.rules.hitrules.SoftSeventeenStrategy softSeventeenHitStrategy) {
-    System.out.println("Använder Soft Seventeen Hit Strategy. ");
+  public void displaySoftSeventeenStrategy() {
+    System.out.println("Använder Soft Seventeen Strategi. ");
   }
 
-  @Override
-  public void visit(model.rules.winrules.EqualScoreDealerWins equalScoreDealerWins) {
-    System.out.println("Använder Equal Score Dealer Wins Rule. ");
+  public void displayEqualScoreDealerWins() {
+    System.out.println("Croupier vinner vid lika poäng. ");
   }
 
-  @Override
-  public void visit(model.rules.winrules.EqualScorePlayerWins equalScorePlayerWins) {
-    System.out.println("Använder Equal Score Player Wins Rule. ");
+  public void displayEqualScorePlayerWins() {
+    System.out.println("Spelare vinner vid lika poäng. ");
   }
-
-  
 
 }

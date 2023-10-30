@@ -103,7 +103,7 @@ public class Dealer extends Player {
   }
 
   /**
-   * Accepts a visitor to visit the rules.
+   * Accepts a visitor to visit the rules created here.
    *
    * @param visitor - The visitor to accept.
    */
