@@ -35,13 +35,12 @@ public interface View extends model.rules.RuleVisitor {
 
    * @param card The card to display.
    */
-  void displayCard(model.Card card);
+  String displayCard(model.Card card);
 
   /**
    * Displays the cards and score of the player.
 
    * @param hand the player's hand.
-   * @param score the player's score.
    */
   void displayPlayerHand(Iterable<model.Card> hand, int score);
 

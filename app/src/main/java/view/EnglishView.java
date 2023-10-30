@@ -14,27 +14,55 @@ public class EnglishView extends BaseView {
     System.out.println("Type 'p' to Play, 'h' to Hit, 's' to Stand or 'q' to Quit\n");
   }
 
+  protected String getPlayerString() {
+    return "Player";
+  }
+
+  protected String getDealerString() {
+    return "Dealer";
+  }
+
+  protected String getHasString() {
+    return "Has:";
+  }
+
+  protected String getScoreString() {
+    return "Score:";
+  } 
+
+  public void displayGameOverMessage() {
+    System.out.println("Game Over! ");
+  }
+
+  public void displayDealerWinsMessage() {
+    System.out.println("Dealer Won!");
+  }
+
+  public void displayPlayerWinsMessage() {
+    System.out.println("You Won!");
+  }
+
   public void displayAmericanNewGameStrategy() {
-    System.out.println("American Strategy. ");
+    System.out.print("Using American game style. ");
   }
 
   public void displayInternationalNewGameStrategy() {
-    System.out.println("International Strategy. ");
+    System.out.print("Using International game style. ");
   }
 
   public void displayBasicHitStrategy() {
-    System.out.println("Basic Hit Strategy. ");
+    System.out.print("Using Basic Hit Strategy. ");
   }
 
   public void displaySoftSeventeenStrategy() {
-    System.out.println("Soft Seventeen Strategy. ");
+    System.out.print("Using Soft Seventeen Strategy. ");
   }
 
   public void displayEqualScoreDealerWins() {
-    System.out.println("Equal Score Dealer Wins. ");
+    System.out.println("Dealer wins on equal score.");
   }
 
   public void displayEqualScorePlayerWins() {
-    System.out.println("Equal Score Player Wins. ");
+    System.out.println("Player wins on equal score.");
   }
 }

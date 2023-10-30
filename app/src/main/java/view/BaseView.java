@@ -56,25 +56,25 @@ public abstract class BaseView implements View {
     }
   }
 
-  public void displayCard(model.Card card) {
-    System.out.println("" + card.getValue() + " of " + card.getColor());
+  public String displayCard(model.Card card) {
+    return card.getValue() + " of " + card.getColor();
   }
 
   public void displayPlayerHand(Iterable<model.Card> hand, int score) {
-    displayHand("Player", hand, score);
+    displayHand(getPlayerString(), hand, score);
   }
 
   public void displayDealerHand(Iterable<model.Card> hand, int score) {
-    displayHand("Dealer", hand, score);
+    displayHand(getDealerString(), hand, score);
   }
 
   private void displayHand(String name, Iterable<model.Card> hand, int score) {
     System.out.println();
-    System.out.println(name + " Has: ");
+    System.out.println(name + " " + getHasString() + " " + score);
     for (model.Card c : hand) {
-      displayCard(c);
+      System.out.println(displayCard(c));
     }
-    System.out.println("Score: " + score);
+    System.out.println(getScoreString() + " " + score);
     System.out.println("");
   }
 
@@ -84,11 +84,11 @@ public abstract class BaseView implements View {
    * @param dealerIsWinner True if the dealer is the winner.
    */
   public void displayGameOver(boolean dealerIsWinner) {
-    System.out.println("GameOver: ");
+    displayGameOverMessage();
     if (dealerIsWinner) {
-      System.out.println("Dealer Won!");
+      displayDealerWinsMessage();
     } else {
-      System.out.println("You Won!");
+      displayPlayerWinsMessage();
     }
   }
 
@@ -100,25 +100,23 @@ public abstract class BaseView implements View {
   public void redrawUi(Game game) {
     System.out.println();
 
-    System.out.print("Dealer: ");
+    System.out.print(getDealerString() + ": ");
     for (Card card : game.getDealerHand()) {
       if (game.getLastDealerCard() == card) {
-        displayCard(card);
+        System.out.print(displayCard(card));
       } else {
-        displayCard(card);
-        System.out.print(", ");
+        System.out.print(displayCard(card) + ", ");
       } 
     }
 
     System.out.println();
 
-    System.out.print("Player: ");
+    System.out.print(getPlayerString() + ": ");
     for (Card card : game.getPlayerHand()) {
       if (game.getLastPlayerCard() == card) {
-        displayCard(card);
+        System.out.print(displayCard(card));
       } else {
-        displayCard(card);
-        System.out.print(", ");
+        System.out.print(displayCard(card) + ", ");
       } 
     }
   }
@@ -147,6 +145,12 @@ public abstract class BaseView implements View {
     displayEqualScorePlayerWins();
   }
 
+  protected abstract void displayGameOverMessage();
+
+  protected abstract void displayDealerWinsMessage();
+
+  protected abstract void displayPlayerWinsMessage();
+
   protected abstract void displayAmericanNewGameStrategy();
 
   protected abstract void displayInternationalNewGameStrategy();
@@ -158,5 +162,13 @@ public abstract class BaseView implements View {
   protected abstract void displayEqualScoreDealerWins();
 
   protected abstract void displayEqualScorePlayerWins();
+
+  protected abstract String getPlayerString();
+
+  protected abstract String getDealerString();
+
+  protected abstract String getHasString();
+
+  protected abstract String getScoreString();
 
 }
