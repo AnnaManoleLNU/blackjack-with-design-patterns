@@ -22,7 +22,5 @@ public class App {
     Player ctrl = new Player(g, v);
     while (ctrl.play(g, v)) {
     }
-
-    System.out.println("Hello assignment 4!");
   }
 }
