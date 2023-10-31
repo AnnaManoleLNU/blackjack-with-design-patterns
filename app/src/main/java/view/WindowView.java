@@ -30,6 +30,7 @@ public class WindowView implements View {
   private Game game;
 
   Font font = new Font("Consolas", Font.PLAIN, 18);
+  Color gameOverColor;
 
   JFrame frame = new JFrame("Blackjack");
   JPanel panel = new JPanel() {
@@ -43,8 +44,16 @@ public class WindowView implements View {
       displayPlayerHand(game.getPlayerHand(), game.getPlayerScore(), g);
       displayDealerHand(game.getDealerHand(), game.getDealerScore(), g);
 
+      // probably in controller
       if (game.isGameOver()) {
         displayGameOver(game.isDealerWinner(), g);
+      }
+
+      // probably in controller
+      if (game.isDealerWinner()) {
+        gameOverColor = Color.RED;
+      } else {
+        gameOverColor = Color.GREEN;
       }
     }
   };
@@ -204,7 +213,7 @@ public class WindowView implements View {
    * Displays the winner of the game.
    */
   public void displayGameOver(boolean dealerIsWinner, Graphics g) {
-    g.setColor(Color.RED);
+    g.setColor(gameOverColor);
     g.setFont(font);
     g.drawString("Game over! " + (dealerIsWinner ? "Dealer" : "Player") + " won!", 20, 550);
   }
