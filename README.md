@@ -18,3 +18,13 @@ A view interface is implemented by the two types of views that are available: on
 The observer pattern was used to notify the Player controller when a player (dealer or human player) draws a new card. Here we have a pause after each draw. The view redraws the UI when this happens and prints out the new state of the game, with the new card.
 
 After all the cards have finished being drawn, the whole game state is printed out, including the scores of the players and in the case of the game being over, the winner is printed out.
+
+
+## Assignment 2 - grade 4
+
+Group members:
+- Anna Manole
+
+Problems with path of images. Should be placed in src/main/resources... Took a long time to get it to work.
+
+I also had to use gradle clean build as a command to get the images to show up.

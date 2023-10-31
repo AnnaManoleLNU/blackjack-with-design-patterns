@@ -1,9 +1,7 @@
 package controller;
 
 import model.Game;
-import view.EnglishView;
-// import view.SwedishView;
-import view.View;
+import view.WindowView;
 
 /**
  * Starts the application using the console.
@@ -15,12 +13,10 @@ public class App {
   * @param args Not used.
   */
   public static void main(String[] args) {
-
     Game g = new Game();
-    View v = new EnglishView();
-    // View v = new SwedishView();
-    Player ctrl = new Player(g, v);
-    while (ctrl.play(g, v)) {
+    WindowView wv = new WindowView();
+    Player ctrl = new Player(g, wv);
+    while (ctrl.play(g, wv)) {
     }
   }
 }
