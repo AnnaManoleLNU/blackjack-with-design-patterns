@@ -25,6 +25,7 @@ public class Player implements PlayerSubscriber {
     // add the controller as a subscriber to the player and dealer
     this.game.getPlayer().addSubscriber(this);
     this.game.getDealer().addSubscriber(this);
+
   }
 
   /**

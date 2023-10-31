@@ -14,7 +14,7 @@ public class App {
   */
   public static void main(String[] args) {
     Game g = new Game();
-    WindowView wv = new WindowView();
+    WindowView wv = new WindowView(g);
     Player ctrl = new Player(g, wv);
     while (ctrl.play(g, wv)) {
     }
