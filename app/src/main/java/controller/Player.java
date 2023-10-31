@@ -3,9 +3,6 @@ package controller;
 import model.Game;
 import model.PlayerSubscriber;
 import view.View;
-// import java.awt.event.*;
-// import java.awt.*;
-import javax.swing.*;
 
 
 /**
@@ -14,11 +11,6 @@ import javax.swing.*;
 public class Player implements PlayerSubscriber {
   private Game game;
   private View view;
-
-  // window 
-  int boardWidth = 800;
-  int boardHeight = 600;
-  JFrame frame = new JFrame("Blackjack");
 
   /**
    * Creates a new instance of the Player class.
@@ -33,13 +25,6 @@ public class Player implements PlayerSubscriber {
     // add the controller as a subscriber to the player and dealer
     this.game.getPlayer().addSubscriber(this);
     this.game.getDealer().addSubscriber(this);
-
-    // create the window
-    frame.setVisible(true);
-    frame.setSize(boardWidth, boardHeight);
-    frame.setLocationRelativeTo(null);
-    frame.setResizable(false);
-    frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
   }
 
   /**
