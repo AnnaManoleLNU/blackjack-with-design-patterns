@@ -4,7 +4,6 @@ import model.Game;
 import model.PlayerSubscriber;
 import view.View;
 
-
 /**
  * Scenario controller for playing the game.
  */
@@ -30,7 +29,7 @@ public class Player implements PlayerSubscriber {
 
   /**
    * Runs the play use case.
-
+   *
    * @param game The game state.
    * @param view The view to use.
    * @return True as long as the game should continue.
@@ -58,7 +57,8 @@ public class Player implements PlayerSubscriber {
         game.stand();
         break;
       case Quit:
-        return false;
+        System.exit(0);
+        break;
       default:
         break;
     }
@@ -69,10 +69,11 @@ public class Player implements PlayerSubscriber {
   @Override
   public void newCardDealt() {
     view.redrawUi(game);
+
     try {
       Thread.sleep(3000);
     } catch (InterruptedException e) {
       e.printStackTrace();
-    }   
+    }
   }
 }

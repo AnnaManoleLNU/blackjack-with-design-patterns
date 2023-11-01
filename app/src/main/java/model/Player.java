@@ -23,7 +23,9 @@ public class Player {
    * @param addToHand The card to add to the hand.
    */
   public void dealCard(Card.Mutable addToHand) {
+    // System.out.println("Dealing card: " + addToHand);  
     hand.add(addToHand);
+    // System.out.println("Current hand: " + hand); 
     // notify subscribers when a new card is dealt
     notifySubscribers();
   }
@@ -41,6 +43,7 @@ public class Player {
    * Removes all cards from the hand.
    */
   public void clearHand() {
+    // System.out.println("Clearing hand: " + hand);
     hand.clear();
   }
 
@@ -102,7 +105,15 @@ public class Player {
     }
   }
 
+  /**
+   * Returns the last card in the player's hand.
+   *
+   * @return the last card in the player's hand.
+   */
   public Card getLastCard() {
+    if (hand.size() == 0) {
+      return null;
+    }
     return hand.get(hand.size() - 1);
   }
 }

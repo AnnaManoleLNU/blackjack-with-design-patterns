@@ -21,11 +21,14 @@ import model.Game;
 public class WindowView implements View {
   private BlockingQueue<GameAction> keyEventsQueue = new LinkedBlockingQueue<>();
 
-  int boardWidth = 800;
+  int boardWidth = 900;
   int boardHeight = 600;
 
   int cardWidth = 110;
   int cardHeight = 154;
+
+  int deckX = 750;
+  int deckY = 40;
 
   private Game game;
 
@@ -37,24 +40,10 @@ public class WindowView implements View {
     @Override
     public void paintComponent(Graphics g) {
       super.paintComponent(g);
-      drawTheStackOfCards(g);
-      displayWelcomeMessage(g);
-      displayDealerScore(g, game.getDealerScore());
-      displayPlayerScore(g, game.getPlayerScore());
-      displayPlayerHand(game.getPlayerHand(), game.getPlayerScore(), g);
-      displayDealerHand(game.getDealerHand(), game.getDealerScore(), g);
+      redrawUi(game, g);
 
-      // probably in controller
-      if (game.isGameOver()) {
-        displayGameOver(game.isDealerWinner(), g);
-      }
-
-      // probably in controller
-      if (game.isDealerWinner()) {
-        gameOverColor = Color.RED;
-      } else {
-        gameOverColor = Color.GREEN;
-      }
+      displayGameOver(game.isDealerWinner(), g);
+      colorGameOver(game.isDealerWinner(), g);
     }
   };
 
@@ -87,7 +76,7 @@ public class WindowView implements View {
   private void drawTheStackOfCards(Graphics g) {
     try {
       Image image = new ImageIcon(getClass().getResource("/cards/HiddenHidden.png")).getImage();
-      g.drawImage(image, 650, 40, cardWidth, cardHeight, null);
+      g.drawImage(image, deckX, deckY, cardWidth, cardHeight, null);
     } catch (Exception e) {
       System.out.println(e);
     }
@@ -96,15 +85,16 @@ public class WindowView implements View {
   @Override
   public void displayWelcomeMessage() {
     panel.repaint();
+    System.out.println("displayWelcomeMessage");
   }
 
   /**
    * Displays an infomative message.
    */
-  public void displayWelcomeMessage(Graphics g) {
+  private void displayWelcomeMessage(Graphics g) {
     g.setColor(Color.WHITE);
     g.setFont(font);
-    g.drawString("Hello Black Jack World! Press 'p' to Play, 'h' to Hit or 's' to Stand", 20, 20);
+    g.drawString("Hello Black Jack World! Press 'p' to Play, 'h' to Hit, 's' to Stand or 'q' to Quit!", 20, 20);
   }
 
   private void displayDealerScore(Graphics g, int score) {
@@ -136,7 +126,7 @@ public class WindowView implements View {
   /**
    * Adds a key listener to the frame.
    */
-  public void addEventListenerToKeyPress() {
+  private void addEventListenerToKeyPress() {
     frame.addKeyListener(new KeyAdapter() {
       @Override
       public void keyPressed(KeyEvent e) {
@@ -145,10 +135,13 @@ public class WindowView implements View {
             keyEventsQueue.add(GameAction.Play);
             break;
           case KeyEvent.VK_H:
-            game.hit();
+            keyEventsQueue.add(GameAction.Hit);
             break;
           case KeyEvent.VK_S:
-            game.stand();
+            keyEventsQueue.add(GameAction.Stand);
+            break;
+          case KeyEvent.VK_Q:
+            keyEventsQueue.add(GameAction.Quit);
             break;
           default:
             break;
@@ -159,8 +152,18 @@ public class WindowView implements View {
 
   private Image getCardImage(Card card) {
     Image image = new ImageIcon(getClass().getResource("/cards/" + card.getValue()
-            + card.getColor() + ".png")).getImage();
+        + card.getColor() + ".png")).getImage();
     return image;
+  }
+
+  @Override
+  public void displayCard(Card card) {
+    System.out.println("" + card.getValue() + " of " + card.getColor());
+  }
+
+  public void displayCard(Card card, int x, int y, Graphics g) {
+    Image image = getCardImage(card);
+    g.drawImage(image, x, y, cardWidth, cardHeight, null);
   }
 
   /**
@@ -171,19 +174,18 @@ public class WindowView implements View {
     int y = 300;
     for (Card card : hand) {
       try {
-        Image image = getCardImage(card);
-        g.drawImage(image, x, y, cardWidth, cardHeight, null);
+        displayCard(card, x, y, g);
       } catch (Exception e) {
-        System.out.println(e);
         System.out.println("Error in displayPlayerHand");
       }
-      x += 20;
+      x += 50;
     }
   }
 
   @Override
   public void displayPlayerHand(Iterable<Card> hand, int score) {
     panel.repaint();
+    System.out.println("displayPlayerHand");
   }
 
   /**
@@ -194,40 +196,56 @@ public class WindowView implements View {
     int y = 80;
     for (Card card : hand) {
       try {
-        Image image = getCardImage(card);
-        g.drawImage(image, x, y, cardWidth, cardHeight, null);
+        displayCard(card, x, y, g);
       } catch (Exception e) {
-        System.out.println(e);
         System.out.println("Error in displayDealerHand");
       }
-      x += 20;
+      x += 50;
     }
   }
 
   @Override
   public void displayDealerHand(Iterable<Card> hand, int score) {
     panel.repaint();
+    System.out.println("displayDealerHand");
   }
 
   /**
-   * Displays the winner of the game.
+   * Draws the game over message.
    */
-  public void displayGameOver(boolean dealerIsWinner, Graphics g) {
+  private void drawGameOver(boolean dealerIsWinner, Graphics g) {
     g.setColor(gameOverColor);
     g.setFont(font);
     g.drawString("Game over! " + (dealerIsWinner ? "Dealer" : "Player") + " won!", 20, 550);
   }
 
+  private void displayGameOver(boolean dealerIsWinner, Graphics g) {
+    if (game.isGameOver()) {
+      drawGameOver(dealerIsWinner, g);
+    }
+  }
+
   @Override
   public void displayGameOver(boolean dealerIsWinner) {
     panel.repaint();
+    System.out.println("displayGameOver");
+  }
+
+  /**
+   * Colors the game over message. Red if the dealer won, green if the player won.
+   */
+  private void colorGameOver(boolean dealerIsWinner, Graphics g) {
+    if (game.isDealerWinner()) {
+      gameOverColor = Color.RED;
+    } else {
+      gameOverColor = Color.GREEN;
+    }
   }
 
   /**
    * Redraws the UI.
    */
   public void redrawUi(Game game, Graphics g) {
-    g.clearRect(0, 0, boardWidth, boardHeight);
     drawTheStackOfCards(g);
     displayWelcomeMessage(g);
     displayDealerScore(g, game.getDealerScore());
@@ -238,12 +256,12 @@ public class WindowView implements View {
 
   @Override
   public void redrawUi(Game game) {
+    SoundPlayer soundPlayer = new SoundPlayer();
+    soundPlayer.playSound();
+
     panel.repaint();
   }
 
-  @Override
-  public void displayCard(Card card) {
-    panel.repaint();
-  }
+
 
 }
