@@ -40,8 +40,8 @@ public class WindowView implements View {
     @Override
     public void paintComponent(Graphics g) {
       super.paintComponent(g);
-      redrawUi(game, g);
 
+      redrawUi(game, g);
       displayGameOver(game.isDealerWinner(), g);
       colorGameOver(game.isDealerWinner(), g);
     }
@@ -170,15 +170,15 @@ public class WindowView implements View {
    * Displays the cards and score of the player.
    */
   public void displayPlayerHand(Iterable<Card> hand, int score, Graphics g) {
-    int x = 200;
-    int y = 300;
+    int x = 200; // end of the player's hand
+    int y = 300; // end of the player's hand
     for (Card card : hand) {
       try {
         displayCard(card, x, y, g);
       } catch (Exception e) {
         System.out.println("Error in displayPlayerHand");
       }
-      x += 50;
+      x += 50; // move the card to the right
     }
   }
 
@@ -261,7 +261,5 @@ public class WindowView implements View {
 
     panel.repaint();
   }
-
-
 
 }

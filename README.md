@@ -1,30 +1,11 @@
-# A3
-
-Assignment 3 - grade 2
-
-Group members:
-- Anna Manole
-
-The application is started from App.java. There the game and view objects are instantiated. These are passed into the Player controller that is responsible for the game loop.
-In the model the dealer plays according to a set of rules that are created in the RulesFactory class. 
-**To modify the way the game is being played, modify the RulesFactory class to create rules to suit your needs.**
-Three difficult rules are attached to a dealer: 
-- rules for how a game should play out; this means things like showing cards or not, potentially who gets their card first could also be implemented (gamerules package)
-- rules for when a dealer should hit (hitrules package)
-- rules for who wins on a draw in this implementation (winrules package).
-
-A view interface is implemented by the two types of views that are available: one for Swedish and one for English. The view is responsible for printing the game state to the user and for getting input from the user. The view is also responsible for printing the result of the game.
-
-The observer pattern was used to notify the Player controller when a player (dealer or human player) draws a new card. Here we have a pause after each draw. The view redraws the UI when this happens and prints out the new state of the game, with the new card.
-
-After all the cards have finished being drawn, the whole game state is printed out, including the scores of the players and in the case of the game being over, the winner is printed out.
-
-
 ## Assignment 2 - grade 4
 
 Group members:
 - Anna Manole
 
-Problems with path of images. Should be placed in src/main/resources... Took a long time to get it to work.
+For this project I used swing as a framework for Java. Initially I had problems with having the path of resources work. They should have been placed in src/main/resources and then use the command gradle clean build. Took a long time to get it to work. I also had to rename all my images so that I don't refactor the model.
 
-I also had to use gradle clean build as a command to get the images to show up.
+Displaying the images was no problem, however animating it went through several failed itterations. I am assuming that it has to do with repainting the panel all the time, but I could not get it to work. I ended up just adding sound on card draw.
+
+I don't think implementing the View interface was optimal, considering I'm overriding the methods in the view class. I would have liked to have a separate class for the view, but then I would have had to rewrite the Player controller. I kept the overridden methods in the WindowView class and use them as a way to debug at the terminal.
+
