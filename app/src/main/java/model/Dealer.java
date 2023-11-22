@@ -1,6 +1,7 @@
 package model;
 
 import model.rules.RulesFactory;
+import model.rules.gamerules.CardDealerUtil;
 import model.rules.gamerules.NewGameStrategy;
 import model.rules.hitrules.HitStrategy;
 import model.rules.winrules.WinCondition;
@@ -14,6 +15,7 @@ public class Dealer extends Player {
   private NewGameStrategy newGameRule;
   private HitStrategy hitRule;
   private WinCondition winCondition;
+  private CardDealerUtil cardDealer;
 
   /**
    * Initializing constructor.
@@ -24,6 +26,7 @@ public class Dealer extends Player {
     newGameRule = rulesFactory.getNewGameRule();
     hitRule = rulesFactory.getHitRule();
     winCondition = rulesFactory.getWinCondition();
+    this.cardDealer = new CardDealerUtil();
   }
 
   /**
@@ -50,11 +53,7 @@ public class Dealer extends Player {
    */
   public boolean hit(Player player) {
     if (deck != null && player.calcScore() < maxScore && !isGameOver()) {
-      Card.Mutable c;
-      c = deck.getCard();
-      c.show(true);
-      player.dealCard(c);
-
+      cardDealer.dealCard(deck, player, true);
       return true;
     }
     return false;
@@ -89,14 +88,10 @@ public class Dealer extends Player {
     if (deck != null) {
       showHand();
       while (hitRule.doHit(this)) {
-        Card.Mutable c;
-        c = deck.getCard();
-        c.show(true);
-        dealCard(c);
+        cardDealer.dealCard(deck, this, true);
       }
       return true;
-    }
-    
+    }   
     return false;
   }
 
