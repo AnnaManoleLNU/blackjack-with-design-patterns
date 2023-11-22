@@ -11,17 +11,18 @@ import model.Player;
 public abstract class BaseNewGameStrategy implements NewGameStrategy {
 
   protected void dealCardToPlayer(Deck deck, Player player, boolean show) {
+    dealCard(deck, player, show);
+  }
+
+  protected void dealCardToDealer(Deck deck, Dealer dealer, boolean show) {
+    dealCard(deck, dealer, show);
+  }
+
+  private void dealCard(Deck deck, Player player, boolean show) {
     Card.Mutable c;
     c = deck.getCard();
     c.show(show);
     player.dealCard(c);
-  }
-
-  protected void dealCardToDealer(Deck deck, Dealer dealer, boolean show) {
-    Card.Mutable c;
-    c = deck.getCard();
-    c.show(show);
-    dealer.dealCard(c);
   }
   
 }
