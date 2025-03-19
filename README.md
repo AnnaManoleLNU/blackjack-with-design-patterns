@@ -1,9 +1,4 @@
-# A3
-
-Assignment 3 - grade 2
-
-Group members:
-- Anna Manole
+# Blackjack with Design Patterns
 
 The application is started from App.java. There the game and view objects are instantiated. These are passed into the Player controller that is responsible for the game loop.
 In the model the dealer plays according to a set of rules that are created in the RulesFactory class. 
